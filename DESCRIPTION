@@ -1,0 +1,9 @@
+Package: Rpraat
+Type: Package
+Title: What the package does (short line)
+Version: 1.0
+Date: 2013-08-03
+Author: John Pellman
+Maintainer: pellman.john@gmail.com
+Description: Various utilities for working with Praat files in R.
+License: GPL v 3.0

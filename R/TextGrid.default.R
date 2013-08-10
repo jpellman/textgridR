@@ -1,0 +1,6 @@
+# class is TextGrid
+# This object has local constants:
+# xmin: The minimum time point value.
+# xmax: The maximum time point value.
+# tiers: A logical denoting whether or not tiers exist.
+# item: An array containing multiple IntervalTiers.
