@@ -1,0 +1,2 @@
+# calls remove.Interval, using a point time argument as both the start and end times for remove.Interval
+# inherits from interval
