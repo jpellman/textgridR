@@ -13,4 +13,5 @@
 
 remove.Interval <- function(textgrid, tier, interval=NULL, xmin, xmax, text){
   # Maybe this could use the search function.
+  # If an Interval is removed, the xmin and xmax values for the IntervalTier containing it should be modified accordingly.
 }
