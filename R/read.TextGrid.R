@@ -19,6 +19,7 @@ read.TextGrid <- function(file) {
   if (!inherits(file, "connection")) {
     if (is.character(file)){
       file <- file(file, "rt")
+      on.exit(close(file))
     } else {
       stop("Invalid argument:  read.TextGrid only accepts file connections or character vectors for argument 'file'.")
     }
@@ -59,18 +60,18 @@ read.TextGrid <- function(file) {
   }
   # While the length of item index is not equal to sizeTextGrid, read in IntervalTiers and store them in the R variable "item".
   while (length(item)!=sizeTextGrid){
-    itemIndex <- gsub("[^1234567890]", "", readLines(file, 1))  
+    itemIndex <- as.numeric(gsub("[^1234567890]", "", readLines(file, 1))) 
     if (readLines(file, 1)=='        class = "IntervalTier" '){
       tierName <- unlist(strsplit(readLines(file, 1), " "))
-      tierName <- as.character(tierName[length(tierName)])
+      tierName <- as.character(gsub('["]', '', tierName[length(tierName)]))
       tierxmin <- unlist(strsplit(readLines(file, 1), " "))
       tierxmin <- as.double(tierxmin[length(tierxmin)])
       tierxmax <- unlist(strsplit(readLines(file, 1), " "))
       tierxmax <- as.double(tierxmax[length(tierxmax)])
-      tierSize <- gsub("[^1234567890]", "", readLines(file, 1))
+      tierSize <- as.numeric(gsub("[^1234567890]", "", readLines(file, 1)))
       tempTierIntervals <- list()
       for (i in 1:tierSize){
-        intervalIndex <- gsub("[^1234567890]", "", readLines(file, 1))
+        intervalIndex <- as.numeric(gsub("[^1234567890]", "", readLines(file, 1)))
         intervalxmin <- unlist(strsplit(readLines(file, 1), " "))
         intervalxmin <- as.double(intervalxmin[length(intervalxmin)])
         intervalxmax <- unlist(strsplit(readLines(file, 1), " "))
@@ -83,6 +84,7 @@ read.TextGrid <- function(file) {
       stop("Error parsing IntervalTiers.")
     }
     item[[itemIndex]] <- TextGrid.IntervalTier(tierName, tierxmin, tierxmax, tempTierIntervals)
+    names(item)[itemIndex] <- tierName
   }
   # To read in an IntervalTier:
     # read in the line :         class = "IntervalTier" ; check to make sure this is correct
