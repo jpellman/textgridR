@@ -17,6 +17,6 @@ TextGrid.IntervalTier <- function(name, xmin, xmax, intervals){
   xmin <- as.double(xmin)
   xmax <- as.double(xmax)
   intervals <- as.list(intervals)
-  intervaltier <- structure(list(name=name, xmin=xmin, xmax=xmax, intervals=intervals), class="TextGrid.IntervalTier")
+  intervaltier <- structure(intervals, class="TextGrid.IntervalTier", name=name, xmin=xmin, xmax=xmax)
   intervaltier
 }
