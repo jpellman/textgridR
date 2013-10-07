@@ -11,15 +11,16 @@
 #' @author John Pellman
 
 add.Interval <- function(textgrid, tier, xmin, xmax, text){
-  # Prepares the IntervalTier.
+  # Checks to see if 'textgrid' is missing.  Throws error if missing.
   if(missing(textgrid) | is.null(textgrid)){
     stop("Error: No argument for 'textgrid'.")
-  } else {
-    tier <- as.character(tier)
-    tier <- textgrid[[tier]]
-    if (is.null(tier)) stop("Error: IntervalTier is null.  Perhaps 'tier' was mistyped.")
   }
+  # Prepares the IntervalTier.
+  tier <- as.character(tier)
+  tier <- textgrid[[tier]]
+  if (is.null(tier)) stop("Error: IntervalTier is null.  Perhaps 'tier' was mistyped.")
   # Extracts all of the tierxmins from the IntervalTier
+  # Coerces them to a table to ensure that there indices are labelled.
   tierxmins <- as.table(sapply(tier, function(x) x$xmin))
   # Prepares the Interval object.
   interval <- TextGrid.Interval(xmin, xmax, text)
