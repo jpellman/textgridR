@@ -30,6 +30,9 @@ add.Interval <- function(textgrid, tier, xmin, xmax, text){
   names(tierxmins) <- c(1:(length(tierxmins)-1), "MARK")
   # Sorts the xmin values
   tierxmins <- sort(tierxmins)
+  
+  # Would findInterval make sense here rather than using a table?
+  
   # Gets the new index for the value of xmin to be inserted.
   addIndex <- which(names(tierxmins)=="MARK")
   # Re-create the IntervalTier accordingly.

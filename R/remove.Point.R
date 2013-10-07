@@ -10,5 +10,5 @@
 #' @author John Pellman
 
 remove.Point <- function(textgrid, tier, point, text){
-  remove.Interval(textgrid=textgrid, tier=tier, interval=NULL, xmin=point, xmax=point, text=text)  
+  remove.Interval(textgrid=textgrid, tier=tier, xmin=point, xmax=point, text=text)  
 }

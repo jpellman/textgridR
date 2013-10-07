@@ -13,6 +13,6 @@
 #' 
 #' @author John Pellman
 
-search.TextGrid <- function(textgrid, tier, xmin, xmax, point, text){
-  
+search.TextGrid <- function(textgrid, tier, xmin, xmax, point=NULL, text){
+  # Use match() perhaps.
 }

@@ -15,14 +15,12 @@ add.IntervalTier <- function(textgrid, tier, name){
   }
   # Checks to see if 'tier' is a vector or an IntervalTier.  If vector, make new IntervalTier based on the vector.
   if (is.vector(tier) && class(tier)=="TextGrid.Interval"){
-    # Determines xmin and xmax values for TextGrid.IntervalTier
-    tierxmins <- as.table(sapply(tier, function(x) x$xmin))
-    tierxmaxs <- as.table(sapply(tier, function(x) x$xmax))
-    tierxmins <- sort(tierxmins)
-    tierxmaxs <- sort(tierxmaxs)
+    # Extracts xmin and xmax values for TextGrid.IntervalTier
+    tierxmins <- sapply(tier, function(x) x$xmin)
+    tierxmaxs <- sapply(tier, function(x) x$xmax)
     # Declares and instatiates an instance of an IntervalTier
     # 'tier' will be coerced to a list internally by TextGrid.IntervalTier.
-    tier <- TextGrid.IntervalTier(name, tierxmins[1], tierxmaxs[length(tierxmaxs)], tier)
+    tier <- TextGrid.IntervalTier(name, which.min(tierxmins), which.max(tierxmaxs), tier)
   } else if (!(class(tier)=="IntervalTier"){
     stop("Error: 'interval' is not an IntervalTier or a vector containing Intervals.")
   }
