@@ -10,6 +10,6 @@
 #' @author John Pellman
 
 add.Point <- function(textgrid, tier, point, text){
-  add.Interval(textgrid=textgrid, tier=tier, interval=NULL, xmin=point, xmax=point, text=text)  
+  add.Interval(textgrid=textgrid, tier=tier, xmin=point, xmax=point, text=text)  
 }
 

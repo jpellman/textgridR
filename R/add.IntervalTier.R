@@ -8,5 +8,8 @@
 #' @author John Pellman
 
 add.IntervalTier <- function(textgrid, tier){
+  # Makes sure that the there is a TextGrid- throws an error otherwise.
+  # Checks to see if 'tier' is a vector or an IntervalTier.  If vector, make new IntervalTier based on the vector.
+  # This could be done by initializing a TextGrid and then perhaps using one of the apply functions with add.Interval?
   
 }
