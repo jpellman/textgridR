@@ -16,6 +16,7 @@ remove.Interval <- function(textgrid, tier, xmin, xmax, text){
   # Actually, match() is perfect for this.
   # ... except for the fact that it will only return one index and not all indices for each instance of a match.
   # I was thinking about finding the intersection of all indices containing xmin, xmax, text...
+  # Use which()
   
   # This function should allow for missing arguments- have it find the most similar Intervals
   # print them out to the user and stop if it finds more than one Interval so that the user

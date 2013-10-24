@@ -8,6 +8,8 @@
 #' @param xmax The end time point for the Interval to be inserted.
 #' @param text The annotation for the Interval to be inserted.
 #' 
+#' @return A TextGrid object with the Interval added.
+#' 
 #' @author John Pellman
 
 add.Interval <- function(textgrid, tier, xmin, xmax, text){
@@ -20,24 +22,23 @@ add.Interval <- function(textgrid, tier, xmin, xmax, text){
   tier <- textgrid[[tier]]
   if (is.null(tier)) stop("Error: IntervalTier is null.  Perhaps 'tier' was mistyped.")
   # Extracts all of the tierxmins from the IntervalTier
-  # Coerces them to a table to ensure that there indices are labelled.
-  tierxmins <- as.table(sapply(tier, function(x) x$xmin))
+  tierxmins <- sapply(tier, function(x) x$xmin)
   # Prepares the Interval object.
   interval <- TextGrid.Interval(xmin, xmax, text)
   # Adds the xmin value of the new Interval to tierxmins
-  tierxmin[length(tierxmins)+1] <- xmin
-  # Gives names to the xmin values, with "MARK" for the new xmin value.
-  names(tierxmins) <- c(1:(length(tierxmins)-1), "MARK")
-  # Sorts the xmin values
-  tierxmins <- sort(tierxmins)
-  
-  # Would findInterval make sense here rather than using a table?
-  
-  # Gets the new index for the value of xmin to be inserted.
-  addIndex <- which(names(tierxmins)=="MARK")
-  # Re-create the IntervalTier accordingly.
-  secondhalf <-tier[[addIndex:length(tier)]]
-  tier[[addIndex]] <- interval
-  tier[[(addIndex+1):(length(tier+1))]] <- secondhalf
-  tier
+  tierxmins[length(tierxmins)+1] <- xmin
+  # Determines the index where the interval shold be added.
+  addIndex <- findInterval(xmin, sort(tierxmins))
+  # Re-creates the IntervalTier unless the add index is greater than the length of the tier,
+  # in which case the interval is added to the end.
+  if (addIndex <= length(tier)){
+    firsthalf <- tier[[1:addIndex-1]]
+    secondhalf <- tier[[addIndex:length(tier)]]
+    firsthalf <- c(firsthalf, interval)
+    tier <- c(firsthalf, secondhalf)
+  } else {
+    tier[[addIndex]] <- interval
+  }
+  textgrid[[tier]] <- tier
+  textgrid
 }
