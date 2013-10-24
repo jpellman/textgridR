@@ -3,25 +3,38 @@
 #' @description Adds an IntervalTier to a TextGrid.  
 #' 
 #' @param textgrid The TextGrid object to modify.
-#' @param tier The IntervalTier object to be inserted.  This can be an IntervalTier object or it can be a vector containing Interval objects (which will then be converted to an IntervalTier internally by this function).
-#' @param name A name for the IntervalTier if 'tier' is a vector of Intervals and not an IntervalTier object.
-#'  
+#' @param name The name of the IntervalTier to be inserted.
+#' @param xmin The earliest time point for the intervals contained in the IntervalTier.
+#' @param xmax The latest time point for the intervals contained in the IntervalTier.
+#' @param intervalmins A vector of beginning values for the Intervals in the IntervalTier.
+#' @param intervalmaxs A vector of end values for the Intervals in the IntervalTier.
+#' @param intervaltexts  A vector of text annotations for the Intervals in the IntervalTier.
+#' 
+#' @return The TextGrid with the new IntervalTier added.
+#' 
 #' @author John Pellman
 
-add.IntervalTier <- function(textgrid, tier, name){
+add.IntervalTier <- function(textgrid, name, xmin, xmax, intervalmins, intervalmaxs, intervaltexts){
   # Makes sure that the there is a TextGrid- throws an error otherwise.
   if(missing(textgrid) | is.null(textgrid)){
-    stop("Error: No argument for 'textgrid'.")
+    stop("Error: No argument or invalid argument for 'textgrid'.")
   }
-  # Checks to see if 'tier' is a vector or an IntervalTier.  If vector, make new IntervalTier based on the vector.
-  if (is.vector(tier) && class(tier)=="TextGrid.Interval"){
-    # Extracts xmin and xmax values for TextGrid.IntervalTier
-    tierxmins <- sapply(tier, function(x) x$xmin)
-    tierxmaxs <- sapply(tier, function(x) x$xmax)
-    # Declares and instatiates an instance of an IntervalTier
-    # 'tier' will be coerced to a list internally by TextGrid.IntervalTier.
-    tier <- TextGrid.IntervalTier(name, which.min(tierxmins), which.max(tierxmaxs), tier)
-  } else if (!(class(tier)=="IntervalTier"){
-    stop("Error: 'interval' is not an IntervalTier or a vector containing Intervals.")
+  # Coerces other variables into correct types.
+  name <- as.character(name)
+  xmin <- as.double(xmin)
+  xmax <- as.double(xmax)
+  intervalmins <- as.double(intervalmins)
+  intervalmaxs <- as.double(intervalmaxs)
+  intervaltexts <- as.character(intervaltexts)
+  # Throws an error if the interval vectors are not the same size or are empty.
+  if (!(length(intervalmins)==length(intervalmaxs)==length(intervaltexts)) | length(intervaltexts)==0){
+    stop("Error: Vectors specifying beginning values, end values, and text annotations are not the same length or are of length 0.")
   }
+  # Fills 'intervals'.
+  intervals <- mapply(TextGrid.Interval(xmin, xmax, text),intervalmins,intervalmaxs,intervaltexts, SIMPLIFY=FALSE)
+  # Creates the IntervalTier.
+  tier <- TextGrid.IntervalTier(name, xmin, xmax, intervals)
+  # Adds the IntervalTier to textgrid.
+  textgrid[[length(textgrid)+1]] <- tier
+  textgrid
 }
