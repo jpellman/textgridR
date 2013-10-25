@@ -14,5 +14,9 @@
 #' @author John Pellman
 
 search.TextGrid <- function(textgrid, tier, xmin, xmax, point=NULL, text){
-  # Use match() perhaps.
+  # If point is not null, set xmin and xmax to point.
+  # If tier is unspecified, iterate through each tier of textgrid.
+  # Extract the xmin, xmax, and text values for each tier using sapply and store in vectors.
+  # Use which() to retrieve indices where the vectors are equal to xmin, xmax, text.
+  # Find the intersection of these indices.
 }
