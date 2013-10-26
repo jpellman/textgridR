@@ -4,12 +4,12 @@
 #' 
 #' @param textgrid The TextGrid object to search.
 #' @param tier If it is known, you can specify the name of the tier that contains the Interval as a character vector.
-#' @param xmin The beginning time point for the Interval.
-#' @param xmax The end time point for the Interval.
+#' @param xmin The beginning time point for the Interval, rounded to a whole integer.
+#' @param xmax The end time point for the Interval, rounded to a whole integer.
 #' @param point A time point if the Interval is an individual time point.
 #' @param text The annotation for the Interval.
 #' 
-#' @return The index for the Interval object matching the arguments.
+#' @return A two element vector containing the indices for the first Interval object matching the arguments and its IntervalTier.
 #' 
 #' @author John Pellman
 
@@ -19,12 +19,13 @@ search.TextGrid <- function(textgrid, tier, xmin, xmax, point=NULL, text){
     stop("Error: No argument for 'textgrid'.")
   }
   # If point is not null, set xmin and xmax to point.
+  # This function uses integers to avoid weird rounding errors.
   if (!is.null(point)){
-    xmin <- point
-    xmax <- point
+    xmin <- as.integer(point)
+    xmax <- as.integer(point)
   } else {
-    xmin <- as.double(xmin)
-    xmax <- as.double(xmax)
+    xmin <- as.integer(xmin)
+    xmax <- as.integer(xmax)
   }
   
   # If tier is unspecified, iterate through each tier of textgrid.
@@ -32,8 +33,8 @@ search.TextGrid <- function(textgrid, tier, xmin, xmax, point=NULL, text){
     # Currently implemented using a for loop.  Perhaps change this to an apply-like function later (maybe use a helper function?).
     for (i in 1:length(textgrid)){
     # Extract the xmin, xmax, and text values for each tier using sapply and store in vectors.
-      xminvals <- sapply(textgrid[[i]], function(x) {x$xmin})
-      xmaxvals <- sapply(textgrid[[i]], function(x) {x$xmax})
+      xminvals <- sapply(textgrid[[i]], function(x) {as.integer(x$xmin)})
+      xmaxvals <- sapply(textgrid[[i]], function(x) {as.integer(x$xmax)})
       textvals <- sapply(textgrid[[i]], function(x) {x$text})
     # Use which() to retrieve indices where the vectors are equal to xmin, xmax, text.
     xminindices <- which(xminvals==xmin)
@@ -51,6 +52,20 @@ search.TextGrid <- function(textgrid, tier, xmin, xmax, point=NULL, text){
   } else {
     # Prepares the IntervalTier.
     tier <- as.character(tier)
+    #Defines intervaltierindex.
+    intervaltierindex <- which(names(textgrid)==tier)
     tier <- textgrid[[tier]]
+    # Extract the xmin, xmax, and text values for each tier using sapply and store in vectors.
+    xminvals <- sapply(tier, function(x) {as.integer(x$xmin)})
+    xmaxvals <- sapply(tier, function(x) {as.integer(x$xmax)})
+    textvals <- sapply(tier, function(x) {x$text})
+    # Use which() to retrieve indices where the vectors are equal to xmin, xmax, text.
+    xminindices <- which(xminvals==xmin)
+    xmaxindices <- which(xmaxvals==xmax)
+    textindices <- which(xmaxvals==xmax)
+    # Find the intersection of these indices.
+    intervalindex <- intersect(intersect(xminindices, xmaxindices), textindices)
   }
+  indices <- c(intervaltierindex, intervalindex)
+  indices
 }
