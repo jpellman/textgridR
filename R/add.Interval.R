@@ -18,8 +18,8 @@ add.Interval <- function(textgrid, tier, xmin, xmax, text){
     stop("Error: No argument for 'textgrid'.")
   }
   # Prepares the IntervalTier.
-  tier <- as.character(tier)
-  tier <- textgrid[[tier]]
+  tierchar <- as.character(tier)
+  tier <- textgrid[[tierchar]]
   if (is.null(tier)) stop("Error: IntervalTier is null.  Perhaps 'tier' was mistyped.")
   # Extracts all of the tierxmins from the IntervalTier
   tierxmins <- sapply(tier, function(x) x$xmin)
@@ -39,6 +39,6 @@ add.Interval <- function(textgrid, tier, xmin, xmax, text){
   } else {
     tier[[addIndex]] <- interval
   }
-  textgrid[[tier]] <- tier
+  textgrid[[tierchar]] <- tier
   textgrid
 }

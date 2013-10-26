@@ -8,17 +8,28 @@
 #' @param xmax The end time point for the Interval.
 #' @param text The annotation for the interval.
 #' 
+#' @return  A TextGrid object with the Interval removed.
+#' 
 #' @author John Pellman
 
 remove.Interval <- function(textgrid, tier, xmin, xmax, text){
-  # Maybe this could use the search function.
   # If an Interval is removed, the xmin and xmax values for the IntervalTier containing it should be modified accordingly.
-  # Actually, match() is perfect for this.
-  # ... except for the fact that it will only return one index and not all indices for each instance of a match.
-  # I was thinking about finding the intersection of all indices containing xmin, xmax, text...
-  # Use which()
-  
   # This function should allow for missing arguments- have it find the most similar Intervals
   # print them out to the user and stop if it finds more than one Interval so that the user
   # can be more specific.
+  # Checks to see if 'textgrid' is missing.  Throws error if missing.
+  if(missing(textgrid) | is.null(textgrid)){
+    stop("Error: No argument for 'textgrid'.")
+  }
+  # Finds the interval in the TextGrid.
+  indices <- search.TextGrid(textgrid=textgrid, tier=tier, xmin=xmin, xmax=xmax, point=NULL, text=text)
+  # Prepares the IntervalTier.
+  tierchar <- names(textgrid[indices[1]])
+  tier <- textgrid[[indices[1]]]
+  if (is.null(tier)) stop("Error: IntervalTier is null.  Perhaps 'tier' was mistyped.")
+  firsthalf <- tier[[1:(indices[2]-1)]]
+  secondhalf <- tier[[(indices[2]+1):length(tier)]]
+  tier <- c(firsthalf, secondhalf)
+  textgrid[[tierchar]] <- tier
+  textgrid
 }
