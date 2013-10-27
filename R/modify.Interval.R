@@ -17,6 +17,10 @@
 #' @author John Pellman
 
 modify.Interval <- function(textgrid, tier, interval=NULL, xmin, xmax, text, newxmin, newxmax, newtext){
+  # Checks to see if 'textgrid' is missing.  Throws error if missing.
+  if(missing(textgrid) | is.null(textgrid)){
+    stop("Error: No argument for 'textgrid'.")
+  } 
   # Finds the Interval to-be-modified.
   indices <- search.TextGrid(textgrid=textgrid, tier=tier, xmin=xmin, xmax=xmax, point=NULL, text=text)
   #Replaces the Interval's xmin, xmax, and text values.
