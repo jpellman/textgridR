@@ -10,6 +10,8 @@
 #' @param newpoint A new time for the time point.
 #' @param newtext A new annotation for the time point.
 #' 
+#' @return A TextGrid object with the modified time point.
+#' 
 #' @author John Pellman
 
 modify.Point <- function(textgrid, tier, interval=NULL, point, text, newpoint, newtext){
