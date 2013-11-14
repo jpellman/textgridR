@@ -19,7 +19,7 @@ add.IntervalTier <- function(textgrid, name, xmin, xmax, intervalmins, intervalm
   if(missing(textgrid) | is.null(textgrid)){
     stop("Error: No argument or invalid argument for 'textgrid'.")
   }
-  # Coerces other variables into correct types.
+  # Casts other variables into correct types.
   name <- as.character(name)
   xmin <- as.double(xmin)
   xmax <- as.double(xmax)
@@ -36,5 +36,16 @@ add.IntervalTier <- function(textgrid, name, xmin, xmax, intervalmins, intervalm
   tier <- TextGrid.IntervalTier(name, xmin, xmax, intervals)
   # Adds the IntervalTier to textgrid.
   textgrid[[length(textgrid)+1]] <- tier
+  # Updates the size of the TextGrid
+  attributes(textgrid)$size <- attributes(textgrid)$size + 1
+  
+  # Updates the TextGrid values of xmin and xmax.
+  if (attributes(textgrid)$xmin>xmin){
+    attributes(textgrid)$xmin <- xmin
+  }
+  if (attributes(textgrid)$xmax<xmax){
+    attributes(textgrid)$xmax <- xmax
+  }
+  
   textgrid
 }

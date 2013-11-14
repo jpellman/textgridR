@@ -18,6 +18,12 @@ write.TextGrid <- function(x, file){
   # Make an array of strings using the c() function (a character vector in R terminology), 
   # with each slot x representing line x of the TextGrid file.
   
+  # Perhaps this should check to make sure that tiers still exist.
+  # Sets up head:
+  tg <- c('File type = "ooTextFile"', 'Object class = "TextGrid"', '', 
+          paste0('xmin = ', attributes(x)$xmin), paste0('xmax = ', attributes(x)$xmax),
+          'tiers? <exists>', paste0('size = ', attributes(x)$size), 'item []:')
+  
   # The above is quite a bit more complicated than it seems right now, and requires
   # a well-rested brain to fully deliberate what needs to be done (i.e., I need to review
   # the formatting of a TextGrid file before I can proceed).

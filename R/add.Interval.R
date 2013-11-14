@@ -40,5 +40,9 @@ add.Interval <- function(textgrid, tier, xmin, xmax, text){
     tier[[addIndex]] <- interval
   }
   textgrid[[tierchar]] <- tier
+  
+  #TODO
+  # IntervalTier's xmin, xmax values should be updated.
+  
   textgrid
 }

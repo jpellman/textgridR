@@ -7,5 +7,6 @@
 #' @author John Pellman
 
 remove.IntervalTier <- function(textgrid, tier){
-  
+ 
+  attributes(textgrid)$size <- attributes(textgrid)$size - 1
 }
