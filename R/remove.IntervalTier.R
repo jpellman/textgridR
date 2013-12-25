@@ -3,7 +3,7 @@
 #' @description Removes an IntervalTier from a TextGrid.
 #' @param textgrid The TextGrid object to modify.
 #' @param tier A character vector containing the name of the IntervalTier to be removed.
-#' @return The TextGrid minux the specified IntervalTier to be removed.
+#' @return The TextGrid minus the specified IntervalTier to be removed.
 #' 
 #' @author John Pellman
 
