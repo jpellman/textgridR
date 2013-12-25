@@ -12,7 +12,7 @@ summary.TextGrid <- function(x){
   cat("\n")
   cat("Names of Tiers: \n")
   cat(attributes(x)$names)
-  cat("\n")
+  cat("\n\n")
   cat("Start Point: ")
   cat(attributes(x)$xmin)
   cat("\n")
