@@ -17,6 +17,8 @@ modify.IntervalTier <- function(textgrid, oldname, newname){
   # Coerces variables to proper types.
   oldname <- as.character(oldname)
   newname <- as.character(newname)
+  # Checks to see if oldname is a valid name of an IntervalTier in the TextGrid.  Throughs an error if not.
+  if (is.null(textgrid[[oldname]])) stop("Error: IntervalTier name not found.  Perhaps 'oldname' was mistyped?")
   # Replaces oldname with newname.  First changes value of the textgrid list's name.
   # Then changes the internal attribute of the IntervalTier object.
   names(textgrid)[which(names(textgrid)==oldname)] <- newname
