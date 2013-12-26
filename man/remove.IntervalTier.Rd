@@ -10,6 +10,10 @@
   \item{tier}{A character vector containing the name of the
   IntervalTier to be removed.}
 }
+\value{
+  The TextGrid minus the specified IntervalTier to be
+  removed.
+}
 \description{
   Removes an IntervalTier from a TextGrid.
 }

@@ -2,9 +2,11 @@
 \alias{write.TextGrid}
 \title{Export a TextGrid}
 \usage{
-  write.TextGrid(file)
+  write.TextGrid(x, file)
 }
 \arguments{
+  \item{x}{A TextGrid object.}
+
   \item{file}{A file connection or a character vector
   containing the path to where the file should be saved.}
 }

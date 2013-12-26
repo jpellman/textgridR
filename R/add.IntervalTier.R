@@ -27,7 +27,7 @@ add.IntervalTier <- function(textgrid, name, xmin, xmax, intervalmins, intervalm
   intervalmaxs <- as.double(intervalmaxs)
   intervaltexts <- as.character(intervaltexts)
   # Throws an error if the interval vectors are not the same size or are empty.
-  if (!(length(intervalmins)==length(intervalmaxs)==length(intervaltexts)) | length(intervaltexts)==0){
+  if ((length(intervalmins)!=length(intervalmaxs))| (length(intervalmins)!=length(intervaltexts)) | (length(intervalmaxs)!=length(intervaltexts)) | length(intervaltexts)==0){
     stop("Error: Vectors specifying beginning values, end values, and text annotations are not the same length or are of length 0.")
   }
   # Fills 'intervals'.

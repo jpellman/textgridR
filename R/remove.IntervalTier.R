@@ -17,7 +17,7 @@ remove.IntervalTier <- function(textgrid, tier){
   # Throw an error if the name does not refer to an indexed IntervalTier.
   if (is.null(textgrid[[tier]])) stop("Error: IntervalTier name not found.  Perhaps 'tier' was mistyped?")
  # Removes the specified IntervalTier.
-  textgrid <- textgrid[[which(names(textgrid)!=tier]]
+  textgrid <- textgrid[[which(names(textgrid)!=tier)]]
   # Updates the size of the TextGrid.
   attributes(textgrid)$size <- attributes(textgrid)$size - 1
   textgrid

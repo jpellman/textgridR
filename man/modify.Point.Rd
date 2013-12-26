@@ -21,6 +21,9 @@
 
   \item{newtext}{A new annotation for the time point.}
 }
+\value{
+  A TextGrid object with the modified time point.
+}
 \description{
   Modifies an individual time point from a specified
   IntervalTier within a TextGrid.

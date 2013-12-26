@@ -27,6 +27,9 @@
 
   \item{newtext}{A new annotation for the interval.}
 }
+\value{
+  A TextGrid object with the modified Interval.
+}
 \description{
   Modifies an Interval from a specified IntervalTier within
   a TextGrid.
