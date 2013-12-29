@@ -2,7 +2,7 @@
 # need to declare/initialize any of these manually at the R prompt.  Can convert to roxygen
 # later if my mind is changed.
 
-TextGrid.Interval.default <- function(xmin, xmax, text){
+TextGridInterval.default <- function(xmin, xmax, text){
   # An object that represents a TextGrid Interval, containing several relevant constants.
   # 
   # Args:
@@ -16,6 +16,6 @@ TextGrid.Interval.default <- function(xmin, xmax, text){
   xmin <- as.double(xmin)
   xmax <- as.double(xmax)
   text <- as.character(text)
-  interval <- structure(list(xmin=xmin, xmax=xmax, text=text), class="TextGrid.Interval")
+  interval <- structure(list(xmin=xmin, xmax=xmax, text=text), class="TextGridInterval")
   interval
 }

@@ -78,12 +78,12 @@ read.TextGrid <- function(file) {
         intervalxmax <- as.double(intervalxmax[length(intervalxmax)])
         text <- unlist(strsplit(readLines(file, 1), " "))
         text <- as.character(gsub('["]', '', text[length(text)]))
-        tempTierIntervals[[intervalIndex]] <- TextGrid.Interval(intervalxmin, intervalxmax, text)
+        tempTierIntervals[[intervalIndex]] <- TextGridInterval(intervalxmin, intervalxmax, text)
       }
     } else {
       stop("Error parsing IntervalTiers.")
     }
-    item[[itemIndex]] <- TextGrid.IntervalTier(tierName, tierxmin, tierxmax, tempTierIntervals)
+    item[[itemIndex]] <- TextGridIntervalTier(tierName, tierxmin, tierxmax, tempTierIntervals)
     names(item)[itemIndex] <- tierName
   }
   # To read in an IntervalTier:

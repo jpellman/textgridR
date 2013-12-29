@@ -1,4 +1,4 @@
-summary.TextGrid.IntervalTier <- function(x){
+summary.TextGridIntervalTier <- function(x){
   cat("IntervalTier Name: ")
   cat(attributes(x)$name)
   cat("\n")

@@ -2,7 +2,7 @@
 # need to declare/initialize any of these manually at the R prompt.  Can convert to roxygen
 # later if my mind is changed.
 
-TextGrid.IntervalTier <- function(name, xmin, xmax, intervals){
+TextGridIntervalTier <- function(name, xmin, xmax, intervals){
   # An object that represents a TextGrid Interval, containing several relevant constants.
   # 
   # Args:
@@ -17,6 +17,6 @@ TextGrid.IntervalTier <- function(name, xmin, xmax, intervals){
   xmin <- as.double(xmin)
   xmax <- as.double(xmax)
   intervals <- as.list(intervals)
-  intervaltier <- structure(intervals, class="TextGrid.IntervalTier", name=name, xmin=xmin, xmax=xmax)
+  intervaltier <- structure(intervals, class="TextGridIntervalTier", name=name, xmin=xmin, xmax=xmax)
   intervaltier
 }

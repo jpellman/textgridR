@@ -33,7 +33,7 @@ add.IntervalTier <- function(textgrid, name, xmin, xmax, intervalmins, intervalm
   # Fills 'intervals'.
   intervals <- mapply(TextGrid.Interval(xmin, xmax, text),intervalmins,intervalmaxs,intervaltexts, SIMPLIFY=FALSE)
   # Creates the IntervalTier.
-  tier <- TextGrid.IntervalTier(name, xmin, xmax, intervals)
+  tier <- TextGridIntervalTier(name, xmin, xmax, intervals)
   # Adds the IntervalTier to textgrid.
   textgrid[[length(textgrid)+1]] <- tier
   # Updates the size of the TextGrid

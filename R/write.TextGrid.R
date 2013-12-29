@@ -26,7 +26,7 @@ write.TextGrid <- function(x, file){
   # There's probably an apply-based way of doing this, but we'll stick to for loops for now.
   for (i in 1:length(x)){
     tg <- c(tg, paste0('    ', 'item [',i,']:'))
-    if (class(x[[i]])=="TextGrid.IntervalTier"){
+    if (class(x[[i]])=="TextGridIntervalTier"){
       tg <- c(tg, '        class = "IntervalTier"')
     }
     tg <- c(tg, paste0('        name = "', attributes(x[[i]])$name,'"'), 

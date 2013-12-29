@@ -24,7 +24,7 @@ add.Interval <- function(textgrid, tier, xmin, xmax, text){
   # Extracts all of the tierxmins from the IntervalTier
   tierxmins <- sapply(tier, function(x) x$xmin)
   # Prepares the Interval object.
-  interval <- TextGrid.Interval(xmin, xmax, text)
+  interval <- TextGridInterval(xmin, xmax, text)
   # Adds the xmin value of the new Interval to tierxmins
   tierxmins[length(tierxmins)+1] <- xmin
   # Determines the index where the interval shold be added.
