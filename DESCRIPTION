@@ -1,9 +1,9 @@
-Package: praatR
+Package: textgridR
 Type: Package
-Title: praatR
-Version: 0.2
-Date: 2013-08-21
+Title: textgridR
+Version: 1.0
+Date: 2014-08-02
 Author: John Pellman
 Maintainer: John Pellman <pellman.john@gmail.com>
-Description: praatR is a library that allows you to manipulate Praat TextGrid files in R.  Praat is an open source software package used extensively in phonetics research that allows you to annotate audio files of human speech.  The TextGrid format is a portable, self-contained representation of these annotations.
+Description: textgridR is a library that allows you to manipulate Praat TextGrid files in R.  Praat is an open source software package used extensively in phonetics research that allows you to annotate audio files of human speech.  The TextGrid format is a portable, self-contained representation of these annotations.
 License: GPL v 3.0
