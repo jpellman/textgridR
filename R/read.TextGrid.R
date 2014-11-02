@@ -7,18 +7,20 @@
 #' @return An S3 object of class "TextGrid", which further contains Intervals and IntervalTiers that can be extracted or manipulated using other functions in this package.
 #' @author John Pellman
 
-read.TextGrid <- function(file) {
+read.TextGrid <- function(file, encoding = getOption("encoding")) {
   # General thoughts on implementing this:
   # The TextGrid object could be a multi-way array.
   # No it can't because the size of the IntervalTiers won't remain constant... maybe a list or table.
   # Maybe get rid of eval(parse()) statements and just use grep for consistency and more sanity.
   # Note: In the future, maybe you are going to need to find a way of implementing this function to work with file types other than "ooTextFile" (although "ooTextFile" files are currently the most important files because I've never really used any other types frankly).
-
+  if (!is.character(encoding)){
+ 	stop('"encoding" must be a character.')
+  }
   # Some pseudocode/an outline:
   # Checks to see if file is a file connection; if not coerces into a file connection (possibly give end user a fileEncoding argument too, similar to read.table)
   if (!inherits(file, "connection")) {
     if (is.character(file)){
-      file <- file(file, "rt")
+      file <- file(file, "rt", encoding=encoding)
       on.exit(close(file))
     } else {
       stop("Invalid argument:  read.TextGrid only accepts file connections or character vectors for argument 'file'.")
