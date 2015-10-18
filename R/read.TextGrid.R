@@ -47,7 +47,7 @@ read.TextGrid <- function(file, encoding = getOption("encoding")) {
   xmaxTextGrid <- unlist(strsplit(readLines(file, 1), " "))
   xmaxTextGrid <- as.double(xmaxTextGrid[length(xmaxTextGrid)])
   # Read in the next line.  If tiers do exist, indicate as such in a logical aptly named "tiers"
-  if(readLines(file, 1)=='tiers? <exists> '){
+  if(grep('tiers? <exists>',readLines(file, 1))) {
     tiers <- TRUE
   } else {
     tiers <- FALSE
@@ -55,7 +55,7 @@ read.TextGrid <- function(file, encoding = getOption("encoding")) {
   sizeTextGrid <- unlist(strsplit(readLines(file, 1), " "))
   sizeTextGrid <- as.double(sizeTextGrid[length(sizeTextGrid)])
   # Skip over the TextGrid declaration of an array "item" (also perhaps check to see if this declaration did, in fact, occur). Initialize "item" as a list (or perhaps a vector if possible and we want to save RAM; or perhaps a multi-way array).
-  if(readLines(file, 1)=='item []: '){
+  if(grep('item []:',readLines(file, 1))){
     item <- list()
   } else {
     stop("Error parsing TextGrid array.")
@@ -63,7 +63,7 @@ read.TextGrid <- function(file, encoding = getOption("encoding")) {
   # While the length of item index is not equal to sizeTextGrid, read in IntervalTiers and store them in the R variable "item".
   while (length(item)!=sizeTextGrid){
     itemIndex <- as.numeric(gsub("[^1234567890]", "", readLines(file, 1))) 
-    if (readLines(file, 1)=='        class = "IntervalTier" '){
+    if (grep('class = "IntervalTier"',readLines(file, 1))) {
       tierName <- unlist(strsplit(readLines(file, 1), " "))
       tierName <- as.character(gsub('["]', '', tierName[length(tierName)]))
       tierxmin <- unlist(strsplit(readLines(file, 1), " "))
