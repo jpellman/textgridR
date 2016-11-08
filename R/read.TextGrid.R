@@ -79,8 +79,9 @@ read.TextGrid <- function(file, encoding = getOption("encoding")) {
         intervalxmin <- as.double(intervalxmin[length(intervalxmin)])
         intervalxmax <- unlist(strsplit(readLines(file, 1), " "))
         intervalxmax <- as.double(intervalxmax[length(intervalxmax)])
-        text <- unlist(strsplit(readLines(file, 1), " "))
-        text <- as.character(gsub('["]', '', text[length(text)]))
+        #text <- unlist(strsplit(readLines(file, 1), " "))
+        #text <- as.character(gsub('["]', '', text[length(text)]))
+        text <- as.character(gsub('["]', '', unlist(strsplit(readLines(file,1), "="))[2]))
         tempTierIntervals[[intervalIndex]] <- TextGridInterval(intervalxmin, intervalxmax, text)
       }
     } else {
