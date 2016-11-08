@@ -48,7 +48,8 @@ read.TextGrid <- function(file, encoding = getOption("encoding")) {
   xmaxTextGrid <- as.double(xmaxTextGrid[length(xmaxTextGrid)])
   # Read in the next line.  If tiers do exist, indicate as such in a logical aptly named "tiers"
   
-  if (length(grep('tiers\\? \\<exists\\>',readLines(file, 1))) == 1) {
+  tierline <- readLines(file, 1)
+  if (length(grep('tiers\\?',tierline)) == 1 && length(grep('\\<exists\\>',tierline)) == 1) {
     tiers <- TRUE
   } else {
     tiers <- FALSE
